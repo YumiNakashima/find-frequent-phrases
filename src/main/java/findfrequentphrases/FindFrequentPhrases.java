@@ -39,9 +39,7 @@ public class FindFrequentPhrases {
 
             sortFrequentPhrases();
 
-            long endInSeconds = (System.currentTimeMillis() - startIMiliseconds);
-
-            System.out.println("Tempo de execução: " + endInSeconds / 1000);
+            System.out.println("Tempo de execução: " + (System.currentTimeMillis() - startIMiliseconds) / 1000);
 
         } catch (IOException e) {
             e.printStackTrace();
