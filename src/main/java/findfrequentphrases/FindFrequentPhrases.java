@@ -15,6 +15,8 @@ import java.util.Map;
  */
 public class FindFrequentPhrases {
 
+    private static final String REGEX_SPLIT = "\\|";
+    private static final Integer SORT_LIMIT = 50000;
     public static Map<String, Integer> mappedPhrases = new HashMap<>();
 
     /**
@@ -25,19 +27,19 @@ public class FindFrequentPhrases {
      * @since 1.0
      */
     public static void readFile(String filePath) throws IOException {
-        long startInSeconds = System.currentTimeMillis();
+        long startIMiliseconds = System.currentTimeMillis();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
 
             while ((line = br.readLine()) != null) {
-                String[] lineSplit = line.split("\\|");
+                String[] lineSplit = line.split(REGEX_SPLIT);
                 groupPhrases(Arrays.asList(lineSplit));
             }
 
             sortFrequentPhrases();
 
-            long endInSeconds = (System.currentTimeMillis() - startInSeconds);
+            long endInSeconds = (System.currentTimeMillis() - startIMiliseconds);
 
             System.out.println("Tempo de execução: " + endInSeconds / 1000);
 
@@ -56,7 +58,7 @@ public class FindFrequentPhrases {
     public static void sortFrequentPhrases() {
         mappedPhrases.entrySet().stream()
                 .sorted((c1, c2) -> c2.getValue().compareTo(c1.getValue()))
-                .limit(50000)
+                .limit(SORT_LIMIT)
                 .forEach(s -> System.out.println("Quantidade: " + s.getValue() + "   -   Frase: " + s.getKey())
                 );
     }
@@ -72,7 +74,6 @@ public class FindFrequentPhrases {
             if (mappedPhrases.get(phrase) != null) {
                 int quantity = mappedPhrases.get(phrase);
                 mappedPhrases.put(phrase, ++quantity);
-
             } else {
                 mappedPhrases.put(phrase, 1);
             }
