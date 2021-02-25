@@ -27,7 +27,7 @@ public class FindFrequentPhrases {
      * @since 1.0
      */
     public static void readFile(String filePath) throws IOException {
-        long startIMiliseconds = System.currentTimeMillis();
+        long startInMilliseconds = System.currentTimeMillis();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
@@ -39,7 +39,7 @@ public class FindFrequentPhrases {
 
             sortFrequentPhrases();
 
-            System.out.println("Tempo de execução: " + (System.currentTimeMillis() - startIMiliseconds) / 1000);
+            System.out.println("Tempo de execução: " + (System.currentTimeMillis() - startInMilliseconds) / 1000);
 
         } catch (IOException e) {
             e.printStackTrace();
